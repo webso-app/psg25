@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS Group Modular</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://psg1351.w3spaces.com/style.css">
+</head>
+
+<body class="text-gray-800 font-sans">
+  <section id="header-section"></section>
+
+  <section id="hero-section" class="relative flex items-center justify-center text-center px-5 py-12"></section>
+
+  <section class="px-5 pt-8 pb-4 bg-gray-50">
+    <div id="solutions-section" class="space-y-5"></div>
+  </section>
+
+  <section class="px-5 py-8">
+    <div id="spaces-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4"></div>
+  </section>
+
+  <section class="px-5 py-8 bg-gray-50">
+    <div id="projects-section" class="space-y-8"></div>
+  </section>
+
+  <section class="px-5 py-8 bg-white">
+    <div id="whyus-section" class="grid grid-cols-2 gap-4"></div>
+  </section>
+
+  <section class="px-5 py-8 bg-gray-50">
+    <div id="about-section" class="space-y-5"></div>
+  </section>
+
+  <footer class="px-5 py-8 bg-gray-100">
+    <div id="footer-section"></div>
+  </footer>
+
+  <script>
+    const domain = "https://psg1351.w3spaces.com"
+    Promise.all([
+      fetch(domain + '/sections/header-global.html').then(r => r.text()),
+      fetch(domain + '/sections/hero.html').then(r => r.text()),
+      fetch(domain + '/sections/solutions.html').then(r => r.text()),
+      fetch(domain + '/sections/spaces.html').then(r => r.text()),
+      fetch(domain + '/sections/projects.html').then(r => r.text()),
+      fetch(domain + '/sections/whyus.html').then(r => r.text()),
+      fetch(domain + '/sections/about.html').then(r => r.text()),
+      fetch(domain + '/sections/footer.html').then(r => r.text())
+    ]).then(parts => {
+      document.body.insertAdjacentHTML('beforeend', parts.join(''));
+      initSections();
+    });
+
+    function initSections() {
+      renderHeader();
+      renderHero({
+        title: "Comprehensive <span class='text-orange-500 font-semibold'>Property&nbsp;Solutions</span><br />for Your Real Estate Assets",
+        description: "From management to development, we&nbsp;handle every aspect of&nbsp;your&nbsp;property’s lifecycle with&nbsp;expertise and&nbsp;precision.",
+        video: {
+          poster: "https://www.ps-group.cz/wp-content/uploads/2024/12/PalladiumBackground_out0001.jpg",
+          src: "https://www.ps-group.cz/wp-content/uploads/2025/01/home-bg-video-2024-01.mp4"
+        },
+        buttons: [
+          { label: "Contact", url: "#", primary: true },
+          { label: "Available spaces", url: "#", outline: true }
+        ]
+      });
+
+      renderSolutions({
+        solutions: [
+          { icon: "fa-chart-line", title: "Real Estate Investment", description: "We create and manage investment opportunities...", tags: ["Komunardů 35", "Villa Caserta"], url: "#" },
+          { icon: "fa-building", title: "Development & Construction", description: "From land to finished building...", tags: ["Komunardů 35", "Jubileum House"], url: "#" }
+        ]
+      });
+
+      renderSpaces({
+        spaces: [
+          { image: "https://www.palladiumoffices.cz/wp-content/uploads/2025/01/09_29_interier-sever-priblizeni-na-kuchyn.jpg", label: "Office", title: "Premium Office Space", subtitle: "Palladium Offices", location: "Prague 1, City Center", area: "250 m²", url: "#" },
+          { image: "https://www.palladiumoffices.cz/wp-content/uploads/2025/01/09_27_interier-recepce.jpg", label: "Retail", title: "Street-level Retail Unit", subtitle: "Smíchov City", location: "Prague 5, Smíchov", area: "120 m²", url: "#" }
+        ]
+      });
+
+      renderProjects({
+        projects: [{
+          category: "Flagship Projects", icon: "fa-rocket", description: "PALLADIUM Prague represents the pinnacle...", items: [
+            { title: "PALLADIUM Shopping Center", image: "https://www.ps-group.cz/wp-content/uploads/2021/05/DSC_9458_PALLADIUM_Praha_Photo_by_Filip_Vido__full.jpg", text: "Our flagship retail destination...", url: "#" }
+          ]
+        }]
+      });
+
+      renderWhyUs({
+        items: [
+          { value: "20+", label: "Years of experience" },
+          { value: "98%", label: "Occupancy rate" },
+          { value: "200", label: "Units under management" },
+          { value: "45+", label: "Experts working for you" }
+        ]
+      });
+
+      renderAbout({
+        cards: [
+          { icon: "fa-users", title: "Our Team", description: "Meet the experienced professionals behind our success.", url: "#", linkText: "Meet the team" },
+          { icon: "fa-leaf", title: "ESG & Charity", description: "Our commitment to environmental, social, and governance principles.", url: "#", linkText: "Learn more" }
+        ]
+      });
+
+      renderFooter({ text: "&copy; 2025 PROPERTY SOLUTIONS GROUP" });
+    }
+  </script>
+</body>
+
+</html>

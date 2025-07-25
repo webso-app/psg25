@@ -1,0 +1,29 @@
+ <template id="header-template">
+  <header class="relative flex justify-between items-center p-4 shadow-md bg-white sticky top-0 z-40 ">
+    <div class="absolute top-[4px] left-[4px] z-30 w-[120px] h-[120px] bg-white rounded-xl shadow-lg flex items-center justify-center">
+      <img src="{{logo}}" alt="PS Group Logo" class="max-h-[80%] max-w-[80%] object-contain" />
+    </div>
+    <div class="w-28 items-center"></div>
+    <div class="flex items-end">
+      <img src="{{claim}}" alt="PS Group claim" class="min-w-[140px] max-h-[80%] mt-1 pl-6 mr-0 pr-0" />
+      <div class="flex items-center space-x-4">
+        <span class="text-sm font-medium">{{language}}</span>
+        <button class="text-gray-700 text-xl border border-gray-400 rounded-full w-9 h-9 flex items-center justify-center ml-4">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+</template>
+
+<script>
+  function renderHeader() {
+    const data = {
+      logo: "https://www.ps-group.cz/wp-content/uploads/2021/02/logo.png.webp",
+      claim: "https://www.ps-group.cz/wp-content/uploads/2021/04/300x44_claim_02.gif",
+      language: "EN"
+    };
+    const tpl = document.getElementById('header-template').innerHTML;
+    document.getElementById('header-section').innerHTML = Mustache.render(tpl, data);
+  }
+</script>

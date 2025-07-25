@@ -1,0 +1,56 @@
+<template id="hero-template">
+  <!-- Hero section -->
+
+  <!-- Buď Background image... -->
+  <section class="relative flex items-center justify-center text-center px-5 overflow-hidden rounded-md mb-2" 
+    style="height: calc(100dvh - 72px); min-height: 468px;
+           {{^video.src}}{{#image}}background-image: url('{{image}}'); background-size: cover; background-position: {{focal}};{{/image}}{{/video.src}}">
+           
+    <!-- ... nebo Background video -->
+    {{#video.src}}
+    <video autoplay muted loop playsinline disablePictureInPicture
+           controlslist="nodownload nofullscreen noremoteplayback"
+           class="absolute inset-0 w-full h-full object-cover z-0"
+           poster="{{video.poster}}">
+      <source src="{{video.src}}" type="video/mp4" />
+    </video>
+    {{/video.src}}
+
+    <!-- Overlay gradient -->
+    <div class="absolute inset-0 z-10 pointer-events-none"
+      style="background: linear-gradient(to right bottom, rgba(95,95,95,0.5), rgba(255,115,22,0.35));"></div>
+
+    <!-- Foreground content -->
+    {{#hasContent}}
+    <div class="relative z-20 max-w-[360px] bg-white/65 p-8 rounded-xl backdrop-blur-sm">
+      {{#title}}
+      <h1 class="text-2xl leading-snug mb-6">{{{title}}}</h1>
+      {{/title}}
+      {{#description}}
+      <p class="box-text text-gray-800 mb-8 leading-loose">{{description}}</p>
+      {{/description}}
+      {{#buttons.length}}
+      <div class="space-y-5">
+        {{#buttons}}
+        <a href="{{url}}"
+           class="block w-full text-sm py-3 rounded-md font-semibold
+             {{#primary}}bg-orange-500 hover:bg-orange-600 text-white{{/primary}}
+             {{#outline}}border border-orange-500 text-orange-500 hover:bg-orange-50{{/outline}}">
+          {{label}}
+        </a>
+        {{/buttons}}
+      </div>
+      {{/buttons.length}}
+    </div>
+    {{/hasContent}}
+  </section>
+</template>
+
+<script>
+  function renderHero(data) {
+    data.hasContent = !!(data.title || data.description || (data.buttons && data.buttons.length > 0));
+    data.focal = data.focal || "center center"; // výchozí střed
+    const tpl = document.getElementById('hero-template').innerHTML;
+    document.getElementById('hero-section').innerHTML = Mustache.render(tpl, data);
+  }
+</script>
