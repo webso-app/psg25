@@ -41,16 +41,16 @@
   </footer>
 
   <script>
-    const domain = "."
+    // Load templates
     Promise.all([
-      fetch(domain + '/sections/header-global.html').then(r => r.text()),
-      fetch(domain + '/sections/hero.html').then(r => r.text()),
-      fetch(domain + '/sections/solutions.html').then(r => r.text()),
-      fetch(domain + '/sections/spaces.html').then(r => r.text()),
-      fetch(domain + '/sections/projects.html').then(r => r.text()),
-      fetch(domain + '/sections/whyus.html').then(r => r.text()),
-      fetch(domain + '/sections/about.html').then(r => r.text()),
-      fetch(domain + '/sections/footer.html').then(r => r.text())
+      fetch('./sections/1-header-global.html').then(r => r.text()),
+      fetch('./sections/2-hero.html').then(r => r.text()),
+      fetch('./sections/solutions.html').then(r => r.text()),
+      fetch('./sections/spaces.html').then(r => r.text()),
+      fetch('./sections/projects.html').then(r => r.text()),
+      fetch('./sections/whyus.html').then(r => r.text()),
+      fetch('./sections/about.html').then(r => r.text()),
+      fetch('./sections/footer.html').then(r => r.text())
     ]).then(parts => {
       document.body.insertAdjacentHTML('beforeend', parts.join(''));
       initSections();
